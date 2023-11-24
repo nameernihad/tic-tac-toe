@@ -7,6 +7,7 @@ import Reset from './Reset';
 import PlayerTab from './PlayerTab';
 import gameOverSoundAsset from '../../src/sounds/259564774-ef9d675c-da4a-4ab4-9aec-7861f3a4869a.wav';
 import clickSoundAsset from '../../src/sounds/259564660-d64f7059-a360-4421-b6d0-8c4d01a2b9a0.wav';
+import Confetti from 'react-confetti';
 
 const gameOverSound = new Audio(gameOverSoundAsset);
 gameOverSound.volume = 1;
@@ -62,12 +63,16 @@ function TicTacToe() {
   const [playerTurn, setPlayerTurn] = useState(PLAYER_X);
   const [strikeClass, setStrikeClass] = useState();
   const [gameState, setGameState] = useState(GameState.inProgress);
+  const [popperOn, setPopperOn] = useState(false);
+  
 
   const handleReset = () => {
     setGameState(GameState.inProgress);
     setTiles(Array(9).fill(null));
     setPlayerTurn(PLAYER_X);
     setStrikeClass(null);
+    setPopperOn(false)
+
   };
 
   const handleClick = (index) => {
@@ -102,10 +107,16 @@ function TicTacToe() {
   useEffect(() => {
     if (gameState != GameState.inProgress) {
       gameOverSound.play();
+      setPopperOn(true)
+
     }
   }, [gameState]);
 
   return (
+    <>
+    {popperOn && (
+      <Confetti speed="fast" quantity={200}/>
+    )}
     <div className="text-customSize">
       <h1>TicTacToe</h1>
       <PlayerTab playerTurn={playerTurn} />
@@ -132,6 +143,7 @@ function TicTacToe() {
         <Reset gameState={gameState} onReset={handleReset} />
       </motion.div>
     </div>
+    </>
   );
 }
 
