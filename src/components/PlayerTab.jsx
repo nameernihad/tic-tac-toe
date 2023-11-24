@@ -4,7 +4,7 @@ const PlayerTab = ({playerTurn}) => {
   const [activeTab, setActiveTab] = useState('player-x');
 
 useEffect(() => {
-    if(playerTurn=="X"){
+    if(playerTurn==="X"){
         setActiveTab('player-x')
     }else{
         setActiveTab('player-o')

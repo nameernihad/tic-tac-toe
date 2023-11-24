@@ -43,7 +43,7 @@ function checkWinner(tiles, setStrikeClass, setGameState) {
       tileValue1 === tileValue3
     ) {
       setStrikeClass(strikeClass);
-      if (tileValue1 == PLAYER_X) {
+      if (tileValue1 === PLAYER_X) {
         setGameState(GameState.playerXWin);
       } else {
         setGameState(GameState.playerOWin);
@@ -87,7 +87,7 @@ function TicTacToe() {
     const newTiles = [...tiles];
     newTiles[index] = playerTurn;
     setTiles(newTiles);
-    if (playerTurn == PLAYER_X) {
+    if (playerTurn === PLAYER_X) {
       setPlayerTurn(PLAYER_O);
     } else {
       setPlayerTurn(PLAYER_X);
@@ -105,7 +105,7 @@ function TicTacToe() {
   }, [tiles]);
 
   useEffect(() => {
-    if (gameState != GameState.inProgress) {
+    if (gameState !== GameState.inProgress) {
       gameOverSound.play();
       setPopperOn(true)
 
